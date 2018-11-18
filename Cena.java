@@ -9,7 +9,8 @@ import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.gl2.GLUT;
 
 public class Cena implements GLEventListener, KeyListener {
-
+    
+    private float x = 0;
     private float angulo = 0;
     private GL2 gl;
     private GLU glu;
@@ -52,7 +53,7 @@ public class Cena implements GLEventListener, KeyListener {
             ligaLuz();
         }
 
-        //barra();
+        barra();
         bolinha();
 
         if (liga) {
@@ -82,6 +83,7 @@ public class Cena implements GLEventListener, KeyListener {
     }
 
     private void barra() {
+        gl.glTranslatef(angulo, angulo, angulo);
         gl.glScalef(20f, 26f, 0);
         gl.glBegin(GL2.GL_QUADS);
 
@@ -94,14 +96,15 @@ public class Cena implements GLEventListener, KeyListener {
     }
 
     private void bolinha() {
+        gl.glScalef(1.3f, 2.3f, 0);
         double limite = 2 * Math.PI;
         double i, centroX, centroY, rX, rY;
 
         centroX = 0;
         centroY = 0;
         //Valores diferentes geram elipses
-        rX = 5.5f;
-        rY = 9f;
+        rX = 5f;
+        rY = 5f;
 
         gl.glBegin(GL2.GL_POLYGON);
         for (i = 0; i < limite; i += 0.01) {
@@ -202,6 +205,13 @@ public class Cena implements GLEventListener, KeyListener {
                     modo = GL2.GL_FILL;
                 }
                 break;
+            case 'd':
+                x = x + 0.1f;
+                System.out.println("Pressionou " + e.getKeyChar());
+                break;
+            case 'a':
+                 x = x - 0.1f;
+                System.out.println("Pressionou " + e.getKeyChar());
         }
     }
 
