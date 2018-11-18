@@ -1,4 +1,4 @@
-package pong;
+package apspong;
 
 import com.jogamp.newt.event.WindowAdapter;
 import com.jogamp.newt.event.WindowEvent;

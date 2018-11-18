@@ -1,4 +1,4 @@
-package pong;
+package apspong;
 
 import com.jogamp.newt.event.KeyEvent;
 import com.jogamp.newt.event.KeyListener;
@@ -52,7 +52,8 @@ public class Cena implements GLEventListener, KeyListener {
             ligaLuz();
         }
 
-        barra();
+        //barra();
+        bolinha();
 
         if (liga) {
             desligaluz();
@@ -81,15 +82,35 @@ public class Cena implements GLEventListener, KeyListener {
     }
 
     private void barra() {
-        gl.glScalef(10f, 16f, 0);
+        gl.glScalef(20f, 26f, 0);
         gl.glBegin(GL2.GL_QUADS);
 
         gl.glVertex2f(-0.7f, -0.3f);
         gl.glVertex2f(-0.7f, 0.3f);
-        gl.glVertex2f(0.7f, 0.3f);       
+        gl.glVertex2f(0.7f, 0.3f);
         gl.glVertex2f(0.7f, -0.3f);
 
         gl.glEnd();
+    }
+
+    private void bolinha() {
+        double limite = 2 * Math.PI;
+        double i, centroX, centroY, rX, rY;
+
+        centroX = 0;
+        centroY = 0;
+        //Valores diferentes geram elipses
+        rX = 5.5f;
+        rY = 9f;
+
+        gl.glBegin(GL2.GL_POLYGON);
+        for (i = 0; i < limite; i += 0.01) {
+            //centroX + raioX,  centroY e raioY		      
+            gl.glVertex2d(centroX + rX * Math.cos(i),
+                    centroY + rY * Math.sin(i));
+        }
+        gl.glEnd();
+
     }
 
     public void iluminacaoEspecular() {
