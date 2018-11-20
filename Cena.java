@@ -110,7 +110,8 @@ public class Cena implements GLEventListener, KeyListener {
         TextRenderer renderer = new TextRenderer(new Font("SansSerif", Font.BOLD, 36));
         renderer.beginRendering(800, 800);
         // optionally set the color
-        renderer.draw("Pressione Espaço para iniciar o jogo ", 250, 500);
+        renderer.draw("Pressione Espaço para iniciar o jogo ", 100, 500);
+        renderer.endRendering();
     }
 
     private void move() {
@@ -361,8 +362,17 @@ public class Cena implements GLEventListener, KeyListener {
                 System.exit(0);
                 break;
             case KeyEvent.VK_SPACE:
-                pontos = 0;
-                fase = 1;
+                if (menu) {
+                    pontos = 0;
+                    fase = 1;
+                    menu = false;
+                } else {
+                    if(vidas <= 0){
+                        pontos = 0;
+                        fase = 1;
+                        vidas = 5;
+                    }
+                }
                 break;
             //........
 
@@ -391,16 +401,21 @@ public class Cena implements GLEventListener, KeyListener {
                 }
                 break;
             case 'd':
-                if (x < 85) {
-                    x = x + 5;
+                if (!menu) {
+                    if (x < 85) {
+                        x = x + 5;
+                    }
+                    System.out.println("X = " + x);
                 }
-                System.out.println("X = " + x);
                 break;
             case 'a':
-                if (x > -85) {
-                    x = x - 5;
+                if (!menu) {
+                    if (x > -85) {
+                        x = x - 5;
+                    }
+
+                    System.out.println("X = " + x);
                 }
-                System.out.println("X = " + x);
                 break;
         }
 
