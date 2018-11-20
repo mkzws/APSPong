@@ -6,6 +6,8 @@ import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.util.FPSAnimator;
+import com.jogamp.opengl.util.awt.TextRenderer;
+import java.awt.Font;
 
 public class Pong {
 
@@ -19,12 +21,13 @@ public class Pong {
         GLProfile profile = GLProfile.get(GLProfile.GL2);
         GLCapabilities caps = new GLCapabilities(profile);        
         window = GLWindow.create(caps);
-        window.setFullscreen(true);
-        //window.setSize(screenWidth, screenHeight);
-        window.setResizable(false);
+        window.setFullscreen(false);
+        window.setSize(screenWidth, screenHeight);
+        window.setResizable(true);
         
         Cena cena = new Cena();
-        window.addGLEventListener(cena); //adiciona a Cena a Janela  
+        TextRenderer renderer = new TextRenderer(new Font("SansSerif", Font.BOLD, 36));
+        window.addGLEventListener(cena); //adiciona a Cena a Janela          
         window.addKeyListener(cena); //registra o teclado na janela
         
         //window.requestFocus();
